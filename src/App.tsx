@@ -3,20 +3,22 @@
 import "./App.css";
 import Overview from "./components/Overview";
 import { useState } from "react";
-import { Simulate } from "react-dom/test-utils";
-import input = Simulate.input;
+import { v4 as uuidv4 } from "uuid";
+import { Task } from "./Task";
 
 function App() {
-  const [tasks, setTask] = useState<Array<string>>([]);
+  const [tasks, setTask] = useState<Array<Task>>([]);
   const [inputValue, setInputValue] = useState("");
 
   function handleInput() {
+    const taskDescriptions = tasks.map((task) => task.description);
     if (!inputValue) {
       alert("No task entered!");
-    } else if (tasks.includes(inputValue)) {
+    } else if (taskDescriptions.includes(inputValue)) {
       alert("Task already included!");
     } else {
-      const finalTasks = [...tasks, inputValue];
+      const newTask: Task = { id: uuidv4(), description: inputValue };
+      const finalTasks: Array<Task> = [...tasks, newTask];
       setTask(finalTasks);
       setInputValue("");
     }

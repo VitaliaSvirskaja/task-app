@@ -1,9 +1,10 @@
 // Renders tasks
 
 import "../Overview.css";
+import { Task } from "../Task";
 
 interface Props {
-  tasks: Array<string>;
+  tasks: Array<Task>;
 }
 
 function Overview(props: Props) {
@@ -12,7 +13,7 @@ function Overview(props: Props) {
       <p>Tasks:</p>
       <ul>
         {props.tasks.map((task) => (
-          <li key={task}>{task}</li>
+          <li key={task.id}>{task.description}</li>
         ))}
       </ul>
     </div>
