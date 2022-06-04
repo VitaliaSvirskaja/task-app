@@ -1,2 +1,19 @@
-.tasklist {
+li {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+}
+
+ul {
+    padding: 0;
+}
+
+p {
+    text-align: center;
 }

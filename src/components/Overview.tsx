@@ -5,6 +5,7 @@ import { Task } from "../Task";
 
 interface Props {
   tasks: Array<Task>;
+  onDeleteTask: (taskID: string) => void;
 }
 
 function Overview(props: Props) {
@@ -13,7 +14,14 @@ function Overview(props: Props) {
       <p>Tasks:</p>
       <ul>
         {props.tasks.map((task) => (
-          <li key={task.id}>{task.description}</li>
+          <li key={task.id}>
+            {task.description}
+            <img
+              src="trash-solid.svg"
+              alt="deleteIcon"
+              onClick={() => props.onDeleteTask(task.id)}
+            />
+          </li>
         ))}
       </ul>
     </div>

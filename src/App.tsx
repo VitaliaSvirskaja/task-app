@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Task } from "./Task";
 
 function App() {
-  const [tasks, setTask] = useState<Array<Task>>([]);
+  const [tasks, setTasks] = useState<Array<Task>>([]);
   const [inputValue, setInputValue] = useState("");
 
   function handleInput() {
@@ -19,13 +19,18 @@ function App() {
     } else {
       const newTask: Task = { id: uuidv4(), description: inputValue };
       const finalTasks: Array<Task> = [...tasks, newTask];
-      setTask(finalTasks);
+      setTasks(finalTasks);
       setInputValue("");
     }
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(event.target.value);
+  }
+
+  function handleDeleteTask(taskID: string) {
+    const newTasks: Array<Task> = tasks.filter((task) => task.id !== taskID);
+    setTasks(newTasks);
   }
 
   return (
@@ -43,7 +48,7 @@ function App() {
           Submit
         </button>
       </div>
-      <Overview tasks={tasks}></Overview>
+      <Overview onDeleteTask={handleDeleteTask} tasks={tasks}></Overview>
     </div>
   );
 }
